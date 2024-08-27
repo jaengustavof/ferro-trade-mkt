@@ -2,7 +2,6 @@
   "name": "ferro-trade-mkt",
   "private": true,
   "version": "0.0.0",
-
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -11,6 +10,10 @@
   },
   "dependencies": {
     "@chainlink/contracts": "0.4.0",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^6.0.0",
+    "@mui/material": "^6.0.0",
     "@nomiclabs/hardhat-ethers": "2.0.5",
     "@nomiclabs/hardhat-waffle": "2.0.2",
     "@openzeppelin/contracts": "4.5.0",
@@ -25,7 +28,9 @@
     "ipfs-http-client": "56.0.1",
     "package.json": "^2.0.1",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-icons": "^5.3.0",
+    "react-router-dom": "^6.26.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
@@ -37,6 +42,7 @@
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
+    "sass-embedded": "^1.77.8",
     "vite": "^5.4.1"
   }
 }

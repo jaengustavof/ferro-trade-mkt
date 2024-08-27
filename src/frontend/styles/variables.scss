@@ -1,0 +1,104 @@
+// Primary Colors
+$primary-color: #4c8dcb;
+$primary-light-color: #2d8de6;
+$primary-dark-color: #0c4a83;
+$waiting-list-color: #23405d;
+$waiting-list-color-light: #4c8dcb;
+
+// Secondary Colors
+$secondary-color: #ffbc2a;
+$secondary-light-color: #f8d442;
+$secondary-dark-color: #de9b0c;
+
+// Gradients
+$gradient-primary: linear-gradient(to right top, $primary-light-color, $waiting-list-color);
+$gradient-secondary: linear-gradient(
+    90deg,
+    $secondary-dark-color,
+    $secondary-light-color,
+    $secondary-dark-color
+);
+$gradient-waiting-list: linear-gradient(to right, $waiting-list-color, $waiting-list-color-light);
+
+// Grayscale
+$white: #ffffff;
+$gray-light: #f2f2f2;
+$gray: #e2e2e2;
+$gray-dark: #808080;
+$black: #0a0a0a;
+
+// Alerts
+$success-color: #28a745;
+$success-color-light: #d4edda;
+$success-color-lighter: #1bdb48;
+$warning-color: #feaf00;
+$warning-color-light: #fbecaf;
+$danger-color: #dc3545;
+$danger-color-light: #f8d7da;
+$info-color: #17a2b8;
+$info-color-light: #bee5eb;
+
+// Fonts
+$base-font-family: "Poppins", sans-serif;
+$heading-font-family: "Lato", sans-serif;
+
+// Font Sizes
+$base-font-size: 1.6rem;
+$small-font-size: 1.4rem;
+$h1-font-size: 2.5rem;
+$h2-font-size: 2.2rem;
+$h3-font-size: 1.75rem;
+$h4-font-size: 1.5rem;
+$h5-font-size: 1.25rem;
+$h6-font-size: 1rem;
+
+// Font Weights
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-bold: 700;
+
+// Borders
+$border-radius: 6px;
+$border-radius-big: 18px;
+$border-width: 1px;
+$border-color: $gray-light;
+
+// Box Shadows
+$box-shadow-sm: 0 1px 2px rgba($black, 0.1);
+$box-shadow-md: 0 2px 4px rgba($black, 0.1);
+$box-shadow-lg: 0 4px 8px rgba($black, 0.1);
+$box-shadow-cards:
+    rgba(255, 255, 255, 0.076) 0px 6px 12px 0px,
+    rgba(255, 255, 255, 0.03) 0px 0px 0px 2px;
+
+//Mobile First Media Queries
+
+@mixin mf-mobile-sm {
+    @media only screen and (min-width: 360px) {
+        @content;
+    }
+}
+
+@mixin mf-mobile {
+    @media only screen and (min-width: 482px) {
+        @content;
+    }
+}
+
+@mixin mf-tablet {
+    @media only screen and (min-width: 768px) {
+        @content;
+    }
+}
+
+@mixin mf-tablet-big {
+    @media only screen and (min-width: 992px) {
+        @content;
+    }
+}
+
+@mixin mf-laptop {
+    @media only screen and (min-width: 1200px) {
+        @content;
+    }
+}

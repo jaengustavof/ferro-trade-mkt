@@ -1,0 +1,84 @@
+.nav-conatainer {
+    width: 100%;
+    height: 8rem;
+    background-color: $primary-color;
+    nav {
+        width: 100%;
+        height: 8rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 2rem;
+        position: relative;
+        .custom-menu-icon {
+            @include mf-tablet-big {
+                display: none;
+            }
+        }
+        .links-container {
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: -100%;
+            background-color: $primary-light-color;
+            z-index: 100;
+            transition: all 0.5s ease;
+            &.show {
+                left: 0;
+            }
+            @include mf-tablet-big {
+                position: initial;
+                width: fit-content;
+                height: 100%;
+                display: flex;
+                background-color: $primary-color;
+                transition: none;
+            }
+            &__close {
+                width: 100%;
+                height: 8rem;
+                padding: 0 2rem;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                @include mf-tablet-big {
+                    display: none;
+                }
+            }
+            &__list {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                height: 100%;
+                padding: 5rem 2rem;
+                @include mf-tablet-big {
+                    flex-direction: row;
+                    gap: 2rem;
+                    width: fit-content;
+                    padding: 0;
+                }
+            }
+            &__list-item {
+                margin: 1rem 0;
+                font-size: $h1-font-size;
+                font-weight: $font-weight-bold;
+                color: $white;
+                text-decoration: none;
+                transition: all 0.3s ease;
+                &:hover {
+                    color: $secondary-color;
+                }
+               
+            }
+            
+        }
+        @include mf-tablet {
+            width: 100%;
+            max-width: 120rem;
+            margin: auto;
+        }
+    }
+}
