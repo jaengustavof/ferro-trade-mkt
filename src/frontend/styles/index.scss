@@ -11,4 +11,5 @@
 
 
 // COMPONENTS
-@import "./components/navbar.scss"
+@import "./components/global/navbar.scss";
+@import "./components/ad-hoc/menu/connectWallet.scss"

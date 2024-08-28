@@ -1,0 +1,60 @@
+import { createContext, useState, useEffect } from 'react';
+import { ethers } from 'ethers';
+import MarketplaceAbi from '../contractsData/Marketplace.json';
+import MarketplaceAddress from '../contractsData/Marketplace-address.json';
+import NFTAbi from '../contractsData/NFT.json';
+import NFTAddress from '../contractsData/NFT-address.json';
+
+export const GlobalContext = createContext();
+
+export const GlobalProvider = ({ children }) => {
+    const [account, setAccount] = useState(null);
+    const [nft, setNFT] = useState({});
+    const [marketplace, setMarketplace] = useState({});
+    const [loading, setLoading] = useState(true);
+
+    const web3Handler = async () => {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        setAccount(accounts[0]);
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        
+        window.ethereum.on('chainChanged', () => {
+            window.location.reload();
+        });
+
+        window.ethereum.on('accountsChanged', async (accounts) => {
+            if (accounts.length === 0) {
+                disconnectWallet(); // If no accounts are returned, consider it as a disconnection
+            } else {
+                setAccount(accounts[0]);
+                await web3Handler();
+            }
+        });
+
+        loadContracts(signer);
+    };
+
+    const loadContracts = async (signer) => {
+        const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
+        setMarketplace(marketplace);
+        const nft = new ethers.Contract(NFTAddress.address, NFTAbi.abi, signer);
+        setNFT(nft);
+        setLoading(false);
+        const owner = await marketplace.owner();
+        console.log(owner)
+    };
+
+    const disconnectWallet = () => {
+        setAccount(null);
+        setNFT({});
+        setMarketplace({});
+        setLoading(true);
+    };
+
+    return (
+        <GlobalContext.Provider value={{ account, nft, marketplace, loading, web3Handler, disconnectWallet }}>
+            {children}
+        </GlobalContext.Provider>
+    );
+};
