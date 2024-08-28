@@ -1,10 +1,29 @@
 import { NavLink } from "react-router-dom";
 import Button from "./Button";
+import { GlobalContext } from "../../context/GlobalContext";
+import { useContext } from "react";
+import ConnectWallet from "../ad-hoc/menu/ConnectWallet";
 import { TiThMenu } from "react-icons/ti";
 import { IoCloseCircle } from "react-icons/io5";
 
 export const NavBar = () => {
 
+
+
+  const links = [
+    {
+    name: "Home",
+    path: "/"
+  },
+  {
+    name: "Market",
+    path: "/market"
+  },
+  {
+    name: "Create",
+    path: "/create"
+  }
+]
   const handleMenuClick = () => {
     document.getElementById("menuContainer").classList.toggle("show");
   }
@@ -27,38 +46,22 @@ export const NavBar = () => {
             />
           </div>
           <div className="links-container__list">
-            <NavLink 
-              to="/" 
-              className="links-container__list-item"
-              onClick={handleMenuClick}
-            >
-              Home
-            </NavLink>
-            <NavLink 
-              to="/market" 
-              className="links-container__list-item"
-              onClick={handleMenuClick}
-            >
-              Market
-            </NavLink>
-            <NavLink 
-              to="/create" 
-              className="links-container__list-item"
-              onClick={handleMenuClick}
+            {links.map((link, index) => (
+              <NavLink 
+                key={index} 
+                to={link.path} 
+                className="links-container__list-item"
+                onClick={handleMenuClick}
               >
-              Create
-            </NavLink>
+                {link.name}
+              </NavLink>
+            ))}
           </div>
-        </div>
-
-        <Button 
-          label="Connect Wallet" 
-          type="primary" 
-          size="medium" 
-          labelColor="white" 
           
-        />
+        </div>
+        <ConnectWallet />
       </nav>
+      
     </div>
 
   )
