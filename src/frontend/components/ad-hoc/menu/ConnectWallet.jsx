@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { GlobalContext } from '../../../context/GlobalContext';
+import Logo from '../../../../assets/metamaskIcon.svg'
 
 const ConnectWallet = () => {
     const { account, web3Handler, disconnectWallet } = useContext(GlobalContext);
@@ -11,8 +12,7 @@ const ConnectWallet = () => {
                     <button 
                         onClick={disconnectWallet}
                         className='connect-wallet-button'
-                    >
-                        Disconnect
+                    >Disconnect
                     </button>
                     
                 </div>
@@ -20,8 +20,7 @@ const ConnectWallet = () => {
                 <button 
                     onClick={web3Handler}
                     className='connect-wallet-button'
-                >
-                    Connect wallet
+                >Conectar
                 </button>
             )}
         </div>
