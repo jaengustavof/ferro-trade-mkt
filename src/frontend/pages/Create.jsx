@@ -5,12 +5,13 @@ import { GlobalContext } from '../context/GlobalContext';
 export const Create = () => {
 
   const { marketplace, nft} = useContext(GlobalContext);
+  const logo = "/assets/img/ferro-logo.svg";
 
   return (
-    <>
-      <div style={{width: '100%', height: '100px', background: 'tomato'}}>Create Header</div>
+    <section className="create-section">
+      <img src={logo} alt="Create NFT" className="create-section__logo"/>
       <CreateForm marketplace={marketplace} nft={nft}  />
-    </>
+    </section>
     
   )
 }

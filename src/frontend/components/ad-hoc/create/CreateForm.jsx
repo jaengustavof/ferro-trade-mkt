@@ -30,8 +30,9 @@ const CreateForm = ({marketplace, nft}) => {
             console.log("uploading image to ipfs");
             try {
                 const result = await client.add(image);
-                console.log(result);
-                setImage(`https://laferro.infura-ipfs.io/ipfs/${result.path}`);
+                const resultUrl = `https://laferro.infura-ipfs.io/ipfs/${result.path}`;
+                setImage(resultUrl);
+                return resultUrl;
                 
             } catch (error) {
                 console.log("ipfs image upload error: ", error);
@@ -42,55 +43,99 @@ const CreateForm = ({marketplace, nft}) => {
     }
 
     //TODO: Crear NFT - Ya está subiendo la imagen a IPFS
-    const createNFT = async () => {
+    const createNFT = async (imageToUpload, dataName, dataDescription, dataShares) => {
+     
+        if(!imageToUpload || !dataName || !dataDescription || !dataShares) return;
 
+        try {
+            const result = await client.add(JSON.stringify({ imageToUpload, dataShares, dataName, dataDescription }));
+            console.log('this is the result', result);
+            mintThenList(result, dataShares);
+            console.log("NFT created and listed successfully");
+        } catch (error) {
+            console.log("ipfs URI upload error: ", error);
+        }
     }
 
-    const onSubmit = (data) => {
-        uploadToIPFS(data.imgPath[0]);
+    const mintThenList = async (result, dataShares) =>{
+        console.log('resunt in teh mintThenList', result);
+        const uri = `https://laferro.infura-ipfs.io/ipfs/${result.path}`;
+        console.log(uri);
+        await (await nft.mint(uri)).wait();
+
+        const id = await nft.tokenCount();
+        await (await nft.setApprovalForAll(marketplace.address, true));
+
+        const sharesAmount = dataShares; 
+        console.log('Shares amount:', sharesAmount);
+        await (await marketplace.makeItem(nft.address, id, sharesAmount)).wait();
+    }
+
+    const onSubmit = async (data) => {
+        
+        const imageToUpload = await uploadToIPFS(data.imgPath[0]);
+        // Ahora llamamos a createNFT pasando los valores directos
         setName(data.name);
         setDescription(data.description);
         setShares(data.shares);
+        setTimeout(() => {
+            createNFT(imageToUpload, data.name, data.description, data.shares);
+        }, 2000);
+        
     }
 
     return (
-        <>
-            <form onSubmit={handleSubmit(onSubmit)} style={{display:'flex', flexDirection:'column', gap:'20px'}}>
-
-                <input 
+        <div className="create-section__form-container">
+            <h1 class="form-heading">Crear NFT</h1>
+            <p class="form-text">Completa los datos para crear un <span class="">nuevo NFT</span></p>
+            <form onSubmit={handleSubmit(onSubmit)} className="create-form">
+                <div className="form-group">
+                    <label htmlFor="imgPath">Seleccione una imagen</label>
+                    <input 
                     type="file" 
+                    id="imgPath" 
                     placeholder="Seleccione una imagen" 
                     {...register("imgPath", { required: true })} 
-                />
-                {errors.imgPath && <span>Debe elegir una imagen</span>}
+                    />
+                    {errors.imgPath && <span className="error-message">Debe elegir una imagen</span>}
+                </div>
 
-                <input 
+                <div className="form-group">
+                    <label htmlFor="name">Nombre del NFT</label>
+                    <input 
                     type="text" 
+                    id="name" 
                     placeholder="Nombre del NFT" 
                     {...register("name", { required: true })} 
-                />
-                {errors.name && <span>Debe ingresar un nombre</span>}
+                    />
+                    {errors.name && <span className="error-message">Debe ingresar un nombre</span>}
+                </div>
 
-                <textarea 
+                <div className="form-group">
+                    <label htmlFor="description">Descripción</label>
+                    <textarea 
+                    id="description" 
                     placeholder="Descripción" 
                     {...register("description", { required: true })} 
-                />
-                {errors.description && <span>Debe ingresar una descripción</span>}
+                    />
+                    {errors.description && <span className="error-message">Debe ingresar una descripción</span>}
+                </div>
 
-                
-                <select {...register("shares", { required: true })}>
-                    
+                <div className="form-group">
+                    <label htmlFor="shares">Cantidad de acciones</label>
+                    <select id="shares" {...register("shares", { required: true })}>
                     <option value="1">1</option>
                     <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="15">15</option>
                     <option value="20">20</option>
                     <option value="25">25</option>
-                </select>
+                    </select>
+                </div>
 
-                <input type="submit" />
-            </form>
-        </>
+                <input type="submit" value="Crear NFT" className="submit-button" />
+                </form>
+        </div>
     )
 }
 

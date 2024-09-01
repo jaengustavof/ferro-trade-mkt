@@ -1,37 +1,41 @@
 import { useState, useEffect } from 'react';
 import { ethers } from "ethers";
+import { BigNumber } from 'ethers';
 
 //TODO: Pendiente Funcion de compra
 const MarketTrade = ({ marketplace, nft }) => {
-    console.log('Testing');
-    console.log('marketplace', marketplace);
-    console.log('nft', nft);
 
     const [loading, setLoading] = useState(true);
     const [items, setItems] = useState([]);
-
+    console.log('this is the marketplace', marketplace)
     const loadMarketplaceItem = async () => {
         const itemCount = await marketplace.itemCount();
         console.log(itemCount.toNumber());
         let items = [];
         for (let i = 1; i <= itemCount; i++) {
-            const item = await marketplace.items(i);
+            const item = await marketplace.items(i);           
             if(!item.sold) {
                 const uri = await nft.tokenURI(item.tokenId);
                 const response = await fetch(uri);
                 const metadata = await response.json();
-                const totalPrice = await marketplace.getPriceFromItem(item.tokenId);
-                item.push({
-                    totalPrice,
+                console.log('metadata', metadata)
+                const tokenID = +BigNumber.from(item.tokenId).toString();
+               
+                const totalPrice = await marketplace.getPriceFromItem(i);
+                console.log('totalPrice', +BigNumber.from(totalPrice).toString());
+                items.push({
+                    totalPrice: +BigNumber.from(totalPrice).toString(),
                     itemId: item.itemId,
                     seller: item.seller,
                     owner: item.owner,
-                    name: metadata.name,
-                    description: metadata.description,
-                    image: metadata.image
+                    shares: metadata.dataShares,
+                    name: metadata.dataName,
+                    description: metadata.dataDescription,
+                    image: metadata.imageToUpload
                 }) 
             }
         }
+        console.log('items', items);
         setLoading(false);
         setItems(items);
     }
@@ -52,29 +56,18 @@ const MarketTrade = ({ marketplace, nft }) => {
                 <div className="px-5 container">
                     <div className="g-4 py-5">
                         {items.map((item, idx) => (
-                            <div key={idx} className="overflow-hidden">
-                                <div>
-                                    <img variant="top" src={item.image} />
-                                    <div color="secondary">
-                                        <p>{item.name}</p>
-                                        <p>{item.description}</p>
-                                    </div>
-                                    <div>
-                                        <div className="d-grid">
-                                            {/*
-                                                <Button onClick={() => buyMarketItem(item)} variant="primary" size="lg">
-                                                    Buy by {ethers.utils.formatEther(item.totalPrice)} ETH
-                                                </Button>
-                                            */}
-                                            <p>price: {item.totalPrice}</p>
-                                            <p>seller: {item.seller}</p>
-                                            <p>owner: {item.owner}</p>
-                                            <p>itemId: {item.itemId} </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
+                            <div key={idx}>
+                                <img src={item.image} alt={item.name} key={idx} />
+                                <p>{item.name}</p>
+                                <p>{item.description}</p>
+                                <p>{item.shares}</p>
+                                <p>{item.totalPrice}</p>
+                                
+                            </ div>
+                            
+                            
+                            
+                           ))}
                     </div>
                 </div>
                 : (
@@ -86,4 +79,4 @@ const MarketTrade = ({ marketplace, nft }) => {
     )
 }
 
-export default MarketTrade
+export default MarketTrade;
