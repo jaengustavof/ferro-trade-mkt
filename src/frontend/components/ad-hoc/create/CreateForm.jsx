@@ -86,8 +86,8 @@ const CreateForm = ({marketplace, nft}) => {
 
     return (
         <div className="create-section__form-container">
-            <h1 class="form-heading">Crear NFT</h1>
-            <p class="form-text">Completa los datos para crear un <span class="">nuevo NFT</span></p>
+            <h1 className="form-heading">Crear NFT</h1>
+            <p className="form-text">Completa los datos para crear un <span className="">nuevo NFT</span></p>
             <form onSubmit={handleSubmit(onSubmit)} className="create-form">
                 <div className="form-group">
                     <label htmlFor="imgPath">Seleccione una imagen</label>

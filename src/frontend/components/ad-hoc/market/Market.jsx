@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ethers } from "ethers";
 import { BigNumber } from 'ethers';
+import { FaCartArrowDown } from "react-icons/fa";
 
 //TODO: Pendiente Funcion de compra
 const MarketTrade = ({ marketplace, nft }) => {
@@ -51,29 +52,37 @@ const MarketTrade = ({ marketplace, nft }) => {
     )
 
     return (
-        <div className="flex justify-center">
+        <div className="market-trade">
             {items.length > 0 ?
-                <div className="px-5 container">
-                    <div className="g-4 py-5">
-                        {items.map((item, idx) => (
-                            <div key={idx}>
-                                <img src={item.image} alt={item.name} key={idx} />
-                                <p>{item.name}</p>
-                                <p>{item.description}</p>
-                                <p>{item.shares}</p>
-                                <p>{item.totalPrice}</p>
-                                
-                            </ div>
-                            
-                            
-                            
-                           ))}
-                    </div>
-                </div>
+                <>
+                    {items.map((item, idx) => (
+                        <div key={idx} className='nft-container'>
+                            <img className='nft-container__image' src={item.image} alt={item.name} key={idx} />
+                            <h4 className='nft-container__title'>{item.name}</h4>
+                            <p className='nft-container__sub'>AD Ferroviaria</p>
+                            {/*<p>{item.description}</p>*/}
+                            <div className='nft-container__info'>
+                                <div className='info-container'>
+                                    <p className='amount'>€ {item.totalPrice}</p>
+                                    <p>precio</p>
+                                </div>
+                                <div className='info-container right'>
+                                    <p className='amount'>x {item.shares}</p>
+                                    <p className='shares'>acciones</p>
+                                </div>
+                            </div>
+                            <div className="nft-container__buttton-container">
+                                <button className='buy'>Comprar</button>
+                                <button className='add'><FaCartArrowDown /></button>
+                            </div>
+                        </ div>
+                    ))}
+                </>
+              
                 : (
-                    <main style={{ padding: "1rem 0" }}>
-                        <h2>No hay NFTs registrados</h2>
-                    </main>
+                   
+                    <h2 className='no-items'>No hay NFTs registrados</h2>
+                    
                 )}
         </div>
     )
