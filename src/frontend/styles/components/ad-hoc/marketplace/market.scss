@@ -1,0 +1,27 @@
+#marketplace {
+    background: $gradient-primary;    
+}
+.market-trade {
+    width: 100%;
+    min-height: 50vh;
+    max-width: 120rem;
+    margin: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    @include mf-tablet {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .no-items {
+        position: absolute;
+        width: 80%;
+        text-align: center;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+    }
+}
