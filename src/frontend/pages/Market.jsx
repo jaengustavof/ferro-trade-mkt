@@ -9,6 +9,7 @@ export const Market = () => {
   const { marketplace, nft, account} = useContext(GlobalContext);
   const navigate = useNavigate();
   
+  //FIX TTHIS
   if (!account) {
     console.log("No account");
     navigate('/');

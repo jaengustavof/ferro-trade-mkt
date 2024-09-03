@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import { Create } from "../pages/Create";
 import { Market } from "../pages/Market";
 import { Error } from "../pages/Error";
+import { Cart } from "../pages/Cart";
 
 
 
@@ -38,6 +39,18 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 element: <Market />,
+            }
+        ]
+
+    },
+    {
+        path: "/cart",
+        element: <AppLayout />,
+        errorElement : <Error />,
+        children:[
+            {
+                index: true,
+                element: <Cart />,
             }
         ]
 

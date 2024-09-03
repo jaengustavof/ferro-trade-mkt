@@ -51,7 +51,6 @@
     &__buttton-container {
         display: flex;
         justify-content: center;
-        align-items: center;   
         button {
             background-color: $secondary-color;
             color: $white;
@@ -67,6 +66,9 @@
         .add {
             border-radius: 0 2rem 2rem 0;
             border-left: 1px solid $gray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             &:hover {
                 background-color: $secondary-dark-color;
             }
