@@ -1,14 +1,10 @@
 import { NavLink } from "react-router-dom";
-import Button from "./Button";
-import { GlobalContext } from "../../context/GlobalContext";
-import { useContext } from "react";
 import ConnectWallet from "../ad-hoc/menu/ConnectWallet";
 import { TiThMenu } from "react-icons/ti";
 import { IoCloseCircle } from "react-icons/io5";
+import { CartMenu } from "../ad-hoc/menu/CartMenu";
 
 export const NavBar = () => {
-
-
 
   const links = [
     {
@@ -59,7 +55,11 @@ export const NavBar = () => {
           </div>
           
         </div>
-        <ConnectWallet />
+        <div className="actions-container">
+          <CartMenu />
+          <ConnectWallet />
+        </div>
+        
       </nav>
       
     </div>

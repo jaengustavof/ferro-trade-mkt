@@ -10,6 +10,11 @@
         align-items: center;
         padding: 0 2rem;
         position: relative;
+        @include mf-tablet {
+            width: 100%;
+            max-width: 120rem;
+            margin: auto;
+        }
         .custom-menu-icon {
             @include mf-tablet-big {
                 display: none;
@@ -75,10 +80,15 @@
             }
             
         }
-        @include mf-tablet {
-            width: 100%;
-            max-width: 120rem;
-            margin: auto;
+        
+        .actions-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            @include mf-tablet-big {
+                gap: 4rem;
+            }
         }
     }
 }

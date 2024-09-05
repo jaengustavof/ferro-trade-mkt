@@ -6,8 +6,6 @@ import { Market } from "../pages/Market";
 import { Error } from "../pages/Error";
 import { Cart } from "../pages/Cart";
 
-
-
 export const router = createBrowserRouter([
     {
         path: "/",

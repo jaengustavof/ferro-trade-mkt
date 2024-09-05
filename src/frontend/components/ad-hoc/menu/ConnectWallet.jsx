@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { GlobalContext } from '../../../context/GlobalContext';
-import Logo from '../../../../assets/metamaskIcon.svg'
+
 
 const ConnectWallet = () => {
     const { account, web3Handler, disconnectWallet } = useContext(GlobalContext);
