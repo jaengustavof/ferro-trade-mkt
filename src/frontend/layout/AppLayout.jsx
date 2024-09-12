@@ -8,7 +8,7 @@ export default function AppLayout() {
     const { account } = useContext(GlobalContext);
     
         return (
-            <section className="app-layout">
+            <main className="app-layout">
                 <NavBar />
                 <p style={{textAlign: 'center'}}>Quitar antes de hacer el deploy</p>
                 {account ? <a 
@@ -19,13 +19,10 @@ export default function AppLayout() {
                         style={{ textAlign: 'center' }}
                     >
                         <div variant="outline-light">
-                            
                             {account}
                         </div>
                     </a> : <p style={{textAlign: 'center'}}>not connected</p>}
-                <main>
-                    <Outlet />
-                </main>
-            </section>
+                <Outlet />     
+            </main>
         );
 }

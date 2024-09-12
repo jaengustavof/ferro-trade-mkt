@@ -12,6 +12,7 @@ export const GlobalProvider = ({ children }) => {
     const [nft, setNFT] = useState({});
     const [marketplace, setMarketplace] = useState({});
     const [loading, setLoading] = useState(true);
+    const [cart, setCart] = useState([]);
 
     const web3Handler = async () => {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -53,7 +54,7 @@ export const GlobalProvider = ({ children }) => {
     };
 
     return (
-        <GlobalContext.Provider value={{ account, nft, marketplace, loading, web3Handler, disconnectWallet }}>
+        <GlobalContext.Provider value={{ account, nft, marketplace, loading, cart, setCart, web3Handler, disconnectWallet }}>
             {children}
         </GlobalContext.Provider>
     );

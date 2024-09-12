@@ -10,7 +10,6 @@ const MarketTrade = ({ marketplace, nft }) => {
     const [items, setItems] = useState([]);
     const loadMarketplaceItem = async () => {
         const itemCount = await marketplace.itemCount();
-        console.log(itemCount.toNumber());
         let items = [];
         for (let i = 1; i <= itemCount; i++) {
             const item = await marketplace.items(i);           
@@ -18,11 +17,9 @@ const MarketTrade = ({ marketplace, nft }) => {
                 const uri = await nft.tokenURI(item.tokenId);
                 const response = await fetch(uri);
                 const metadata = await response.json();
-                console.log('metadata', metadata)
                 const tokenID = +BigNumber.from(item.tokenId).toString();
                
                 const totalPrice = await marketplace.getPriceFromItem(i);
-                console.log('totalPrice', +BigNumber.from(totalPrice).toString());
                 items.push({
                     totalPrice: +BigNumber.from(totalPrice).toString(),
                     itemId: item.itemId,
@@ -35,7 +32,6 @@ const MarketTrade = ({ marketplace, nft }) => {
                 }) 
             }
         }
-        console.log('items', items);
         setLoading(false);
         setItems(items);
     }

@@ -1,4 +1,4 @@
-import { useContext, useEffect} from 'react';
+import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import { GlobalContext } from '../context/GlobalContext';
 import { MarketHeader } from '../components/ad-hoc/market/MarketHeader';
@@ -9,11 +9,11 @@ export const Market = () => {
   const { marketplace, nft, account} = useContext(GlobalContext);
   const navigate = useNavigate();
   
-  if (!account) {
-    console.log("No account");
-    navigate('/');
-    return null;
-  }
+  useEffect(() => {
+    if(!account) {
+      navigate('/');
+    }
+  }, []);
 
   return (
     <section id='marketplace'>

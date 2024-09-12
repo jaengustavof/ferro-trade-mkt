@@ -56,6 +56,7 @@
             align-items: center;
             gap: 1rem;
             margin-bottom: 3rem;
+            text-decoration: none;
             @include mf-tablet {
                 max-width: 48rem;
                 display: flex;
