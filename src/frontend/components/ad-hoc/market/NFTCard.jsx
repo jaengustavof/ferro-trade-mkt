@@ -5,12 +5,31 @@ import useCart from '../../../hooks/useCart';
 export const NFTCard = ({ items }) => {
     const { cart, setCart } = useCart();
 
+    const quantityControl = (cart, item) => {
+        let totalShares = 0;
+        cart.forEach(item => {
+            totalShares += +item.shares;
+        });
+        if(totalShares + +item.shares > 25) {
+            console.log('totalShares:', totalShares);
+            console.log('item.shares:', item.shares);
+            console.log('No puedes añadir más de 25 acciones');
+            return true;
+        }
+        
+
+    }
+
     const handleBuy = () => {
         console.log('Comprar');
     };
 
     const handleAdd = (item) => {
         /// Verificar si el item ya está en el carrito usando su itemId o keyidx
+
+        if(quantityControl(cart, item)) return;
+        
+        console.log('item:', item.shares);
         const isItemInCart = cart.some(cartItem => cartItem.itemId === item.itemId); // O usar keyidx si no tienes itemId
 
         if (!isItemInCart) {
