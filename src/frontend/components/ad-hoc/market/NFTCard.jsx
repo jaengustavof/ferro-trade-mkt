@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { FaCartArrowDown } from "react-icons/fa";
 import useCart from '../../../hooks/useCart';
+import { toast } from 'react-toastify';
 
 export const NFTCard = ({ items }) => {
     const { cart, setCart } = useCart();
@@ -11,13 +12,12 @@ export const NFTCard = ({ items }) => {
             totalShares += +item.shares;
         });
         if(totalShares + +item.shares > 25) {
-            console.log('totalShares:', totalShares);
-            console.log('item.shares:', item.shares);
-            console.log('No puedes añadir más de 25 acciones');
+            toast.error("No es posible comprar más de 25 acciones por persona", {
+                position: "top-right",
+              });
             return true;
         }
-        
-
+        return false;
     }
 
     const handleBuy = () => {
@@ -26,24 +26,24 @@ export const NFTCard = ({ items }) => {
 
     const handleAdd = (item) => {
         /// Verificar si el item ya está en el carrito usando su itemId o keyidx
-
-        if(quantityControl(cart, item)) return;
         
-        console.log('item:', item.shares);
-        const isItemInCart = cart.some(cartItem => cartItem.itemId === item.itemId); // O usar keyidx si no tienes itemId
+        const isItemInCart = cart.some(cartItem => cartItem.itemId === item.itemId);
 
         if (!isItemInCart) {
+            if(quantityControl(cart, item)) return;
             const newCart = [...cart, item]; // Si no está en el carrito, lo añadimos
             setCart(newCart); // Actualizar el carrito en el contexto
-            console.log('Añadido al carrito:', item);
+            
+            toast.success("NFT añadido al carrito", {
+                position: "top-right",
+              });
         } else {
-            console.log('El item ya está en el carrito:', item);
+            
+            toast.warn("Este NFT ya está en el carrito", {
+                position: "top-right",
+              });
         }
     };
-
-    useEffect(() => {
-        console.log('Items:', cart);
-    }, [cart]);
 
     return (
         <> 
