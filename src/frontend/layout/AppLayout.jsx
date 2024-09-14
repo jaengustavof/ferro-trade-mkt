@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import { NavBar } from "../components/global/NavBar";
 import { useContext } from "react";
 import { GlobalContext } from "../context/GlobalContext";
+import { Footer } from "../components/global/Footer";
 
 export default function AppLayout() {
 
@@ -23,6 +24,7 @@ export default function AppLayout() {
                         </div>
                     </a> : <p style={{textAlign: 'center'}}>not connected</p>}
                 <Outlet />     
+                <Footer />
             </main>
         );
 }
