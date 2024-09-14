@@ -1,6 +1,7 @@
 import Heading from "../components/ad-hoc/home/Heading";
 import Slider from "../components/global/Slider";
 import PriceList from "../components/ad-hoc/home/PriceList";
+import Faqs from "../components/ad-hoc/home/Faqs";
 
 const images = [
   "/assets/img/marketplace/nft1.svg",
@@ -34,7 +35,8 @@ const Home = () => {
       >
           <path fill="#f2f2f2" fillOpacity="1" d="M0,60L1440,180L1440,0L0,0Z"></path>
       </svg>
-      <div>Home de la actual waiting list</div>
+      <h2 className="home-page__nfts">Preguntas frecuentes</h2>
+      <Faqs />
     </section>
     
   )
