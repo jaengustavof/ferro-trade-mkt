@@ -1,10 +1,12 @@
-import { useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import { FaCartArrowDown } from "react-icons/fa";
 import useCart from '../../../hooks/useCart';
 import { toast } from 'react-toastify';
 
 export const NFTCard = ({ items }) => {
     const { cart, setCart } = useCart();
+
+    const navigate = useNavigate();
 
     const quantityControl = (cart, item) => {
         let totalShares = 0;
@@ -20,13 +22,8 @@ export const NFTCard = ({ items }) => {
         return false;
     }
 
-    const handleBuy = () => {
-        console.log('Comprar');
-    };
-
-    const handleAdd = (item) => {
+    const addToCart = (item) => {
         /// Verificar si el item ya está en el carrito usando su itemId o keyidx
-        
         const isItemInCart = cart.some(cartItem => cartItem.itemId === item.itemId);
 
         if (!isItemInCart) {
@@ -43,6 +40,16 @@ export const NFTCard = ({ items }) => {
                 position: "top-right",
               });
         }
+    }
+
+    const handleBuy = (item) => {
+        addToCart(item);
+        navigate('/cart');
+    };
+
+    const handleAdd = (item) => {
+        
+        addToCart(item);
     };
 
     return (
@@ -65,7 +72,7 @@ export const NFTCard = ({ items }) => {
                     <div className="nft-container__buttton-container">
                         <button 
                             className='buy'
-                            onClick={handleBuy}
+                            onClick={() => handleBuy(item)}
                         >Comprar</button>
                         <button 
                             className='add'
