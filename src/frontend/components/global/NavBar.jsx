@@ -3,9 +3,12 @@ import ConnectWallet from "../ad-hoc/menu/ConnectWallet";
 import { TiThMenu } from "react-icons/ti";
 import { IoCloseCircle } from "react-icons/io5";
 import { CartMenu } from "../ad-hoc/menu/CartMenu";
+import useIsOwner from "../../hooks/useIsOwner";
 
 export const NavBar = () => {
 
+  const isOwner = useIsOwner();
+  
   const links = [
     {
     name: "Home",
@@ -15,10 +18,7 @@ export const NavBar = () => {
     name: "Market",
     path: "/market"
   },
-  {
-    name: "Create",
-    path: "/create"
-  }
+  ...(isOwner ? [{ name: "Create", path: "/create" }] : []) 
 ]
   const handleMenuClick = () => {
     document.getElementById("menuContainer").classList.toggle("show");

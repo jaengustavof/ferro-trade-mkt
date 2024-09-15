@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form"
 import { useState } from "react";
-import { ethers } from "ethers";
+import useIsOwner from "../../../hooks/useIsOwner";
 import { create as ipfsHttpClient } from 'ipfs-http-client';
 
 const projectId = '06b3fb98b08f420e836654cb904692b5';
@@ -16,6 +16,8 @@ const CreateForm = ({marketplace, nft}) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [shares, setShares] = useState(null);
+
+    const isOwner = useIsOwner();
 
     const {
         register,
@@ -86,55 +88,59 @@ const CreateForm = ({marketplace, nft}) => {
 
     return (
         <div className="create-section__form-container">
-            <h1 className="form-heading">Crear NFT</h1>
-            <p className="form-text">Completa los datos para crear un <span className="">nuevo NFT</span></p>
-            <form onSubmit={handleSubmit(onSubmit)} className="create-form">
-                <div className="form-group">
-                    <label htmlFor="imgPath">Seleccione una imagen</label>
-                    <input 
-                    type="file" 
-                    id="imgPath" 
-                    placeholder="Seleccione una imagen" 
-                    {...register("imgPath", { required: true })} 
-                    />
-                    {errors.imgPath && <span className="error-message">Debe elegir una imagen</span>}
-                </div>
+            {isOwner ? 
+            <>
+                <h1 className="form-heading">Crear NFT</h1>
+                <p className="form-text">Completa los datos para crear un <span className="">nuevo NFT</span></p>
+                <form onSubmit={handleSubmit(onSubmit)} className="create-form">
+                    <div className="form-group">
+                        <label htmlFor="imgPath">Seleccione una imagen</label>
+                        <input 
+                        type="file" 
+                        id="imgPath" 
+                        placeholder="Seleccione una imagen" 
+                        {...register("imgPath", { required: true })} 
+                        />
+                        {errors.imgPath && <span className="error-message">Debe elegir una imagen</span>}
+                    </div>
 
-                <div className="form-group">
-                    <label htmlFor="name">Nombre del NFT</label>
-                    <input 
-                    type="text" 
-                    id="name" 
-                    placeholder="Nombre del NFT" 
-                    {...register("name", { required: true })} 
-                    />
-                    {errors.name && <span className="error-message">Debe ingresar un nombre</span>}
-                </div>
+                    <div className="form-group">
+                        <label htmlFor="name">Nombre del NFT</label>
+                        <input 
+                        type="text" 
+                        id="name" 
+                        placeholder="Nombre del NFT" 
+                        {...register("name", { required: true })} 
+                        />
+                        {errors.name && <span className="error-message">Debe ingresar un nombre</span>}
+                    </div>
 
-                <div className="form-group">
-                    <label htmlFor="description">Descripción</label>
-                    <textarea 
-                    id="description" 
-                    placeholder="Descripción" 
-                    {...register("description", { required: true })} 
-                    />
-                    {errors.description && <span className="error-message">Debe ingresar una descripción</span>}
-                </div>
+                    <div className="form-group">
+                        <label htmlFor="description">Descripción</label>
+                        <textarea 
+                        id="description" 
+                        placeholder="Descripción" 
+                        {...register("description", { required: true })} 
+                        />
+                        {errors.description && <span className="error-message">Debe ingresar una descripción</span>}
+                    </div>
 
-                <div className="form-group">
-                    <label htmlFor="shares">Cantidad de acciones</label>
-                    <select id="shares" {...register("shares", { required: true })}>
-                    <option value="1">1</option>
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                    <option value="20">20</option>
-                    <option value="25">25</option>
-                    </select>
-                </div>
+                    <div className="form-group">
+                        <label htmlFor="shares">Cantidad de acciones</label>
+                        <select id="shares" {...register("shares", { required: true })}>
+                        <option value="1">1</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="25">25</option>
+                        </select>
+                    </div>
 
-                <input type="submit" value="Crear NFT" className="submit-button" />
+                    <input type="submit" value="Crear NFT" className="submit-button" />
                 </form>
+            </> : 
+            <h1 className="form-heading">No tienes permisos para ingresar en esta sección</h1>}
         </div>
     )
 }
