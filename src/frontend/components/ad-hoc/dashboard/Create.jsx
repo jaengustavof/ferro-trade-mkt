@@ -1,6 +1,6 @@
-import CreateForm from "../components/ad-hoc/create/CreateForm";
+import CreateForm from "./CreateForm";
 import { useContext } from 'react';
-import { GlobalContext } from '../context/GlobalContext';
+import { GlobalContext } from '../../../context/GlobalContext';
 
 export const Create = () => {
 

@@ -24,7 +24,6 @@ export const Market = () => {
       <MarketHeader account={account} />
       <MarketTrade marketplace={marketplace} nft={nft} />
       <ToastContainer />
-      <div>Market Footer</div>
     </section>
     
   )

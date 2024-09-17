@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 import AppLayout from "../layout/AppLayout";
 import Home from "../pages/Home";
-import { Create } from "../pages/Create";
 import { Market } from "../pages/Market";
 import { Error } from "../pages/Error";
 import { Cart } from "../pages/Cart";
+import { DashBoard } from "../pages/DashBoard";
 
 export const router = createBrowserRouter([
     {
@@ -15,17 +15,6 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 element: <Home />,
-            }
-        ]
-    },
-    {
-        path: "/create",
-        element: <AppLayout />,
-        errorElement : <Error />,
-        children: [
-            {
-                index: true,
-                element: <Create />,
             }
         ]
     },
@@ -49,6 +38,18 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 element: <Cart />,
+            }
+        ]
+
+    },
+    {
+        path: "/dashboard",
+        element: <AppLayout />,
+        errorElement : <Error />,
+        children:[
+            {
+                index: true,
+                element: <DashBoard />,
             }
         ]
 

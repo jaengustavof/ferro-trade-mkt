@@ -17,7 +17,7 @@ export default function AppLayout() {
                         target="_blank"
                         rel="noreferrer noopener"
                         className="button nav-button btn-sm mx-4"
-                        style={{ textAlign: 'center' }}
+                        style={{ textAlign: 'center', fontSize: '1rem' }}
                     >
                         <div variant="outline-light">
                             {account}

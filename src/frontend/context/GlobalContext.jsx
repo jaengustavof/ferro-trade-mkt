@@ -13,6 +13,7 @@ export const GlobalProvider = ({ children }) => {
     const [marketplace, setMarketplace] = useState({});
     const [loading, setLoading] = useState(true);
     const [cart, setCart] = useState([]);
+    const [priceRanges, setPriceRanges] = useState([]);
 
     const web3Handler = async () => {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -36,6 +37,27 @@ export const GlobalProvider = ({ children }) => {
         loadContracts(signer);
     };
 
+    const loadPriceRanges = async (marketplaceContract) => {
+
+        try {
+            let ranges = [];
+            // Sabemos que hay 5 price ranges basados en el smart contract
+            for (let i = 0; i < 5; i++) {
+                const range = await marketplaceContract.priceRanges(i); // Llamada a la función del contrato
+                
+                ranges.push({
+                    min: range.min.toNumber(),
+                    max: range.max.toNumber(),
+                    price: range.price.toNumber(),
+                });
+            }
+
+            setPriceRanges(ranges); // Guardar los priceRanges en el estado
+        } catch (error) {
+            console.error("Error al cargar los price ranges:", error);
+        }
+    };
+
     const loadContracts = async (signer) => {
         const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
         setMarketplace(marketplace);
@@ -43,7 +65,7 @@ export const GlobalProvider = ({ children }) => {
         setNFT(nft);
         setLoading(false);
         const owner = await marketplace.owner();
-        console.log(owner)
+        await loadPriceRanges(marketplace);
     };
 
     const disconnectWallet = () => {
@@ -54,7 +76,7 @@ export const GlobalProvider = ({ children }) => {
     };
 
     return (
-        <GlobalContext.Provider value={{ account, nft, marketplace, loading, cart, setCart, web3Handler, disconnectWallet }}>
+        <GlobalContext.Provider value={{ account, nft, marketplace, loading, cart, setCart, priceRanges, setPriceRanges,     web3Handler, disconnectWallet }}>
             {children}
         </GlobalContext.Provider>
     );

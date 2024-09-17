@@ -18,7 +18,7 @@ export const NavBar = () => {
     name: "Market",
     path: "/market"
   },
-  ...(isOwner ? [{ name: "Create", path: "/create" }] : []) 
+  ...(isOwner ? [{ name: "Dashboard", path: "/dashboard" }] : []) 
 ]
   const handleMenuClick = () => {
     document.getElementById("menuContainer").classList.toggle("show");

@@ -1,0 +1,29 @@
+.dash-menu {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $primary-color;
+    border-bottom: 1px solid $white;
+    &__container {
+        max-width: 120rem;
+        margin: 0 auto;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__button {
+        flex-shrink: 0;
+        padding: 2rem 1rem;
+        max-width: 30%;
+        text-align: center;
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: $white;
+        &.selected {
+            background-color: $primary-dark-color;
+            color: $secondary-color;
+        }
+    }
+}
