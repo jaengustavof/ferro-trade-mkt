@@ -76,7 +76,17 @@ export const GlobalProvider = ({ children }) => {
     };
 
     return (
-        <GlobalContext.Provider value={{ account, nft, marketplace, loading, cart, setCart, priceRanges, setPriceRanges,     web3Handler, disconnectWallet }}>
+        <GlobalContext.Provider value={{ account, 
+                                        nft, 
+                                        marketplace, 
+                                        loading, 
+                                        cart, 
+                                        setCart, 
+                                        priceRanges, 
+                                        setPriceRanges, 
+                                        web3Handler, 
+                                        disconnectWallet 
+                                    }}>
             {children}
         </GlobalContext.Provider>
     );

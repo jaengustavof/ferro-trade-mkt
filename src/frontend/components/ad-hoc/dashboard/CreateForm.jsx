@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form"
 import { useState } from "react";
 import useIsOwner from "../../../hooks/useIsOwner";
 import { create as ipfsHttpClient } from 'ipfs-http-client';
+import { toast } from 'react-toastify';
 
 const projectId = '06b3fb98b08f420e836654cb904692b5';
 const projectSecret = 'D+eRfWMNPvaKfoLjKaA6ql3O0+2VTdDFAfGhciAZKWzc4+TuVTSnog';
@@ -22,18 +23,20 @@ const CreateForm = ({marketplace, nft}) => {
     const {
         register,
         handleSubmit,
+        reset,
         watch,
         formState: { errors },
     } = useForm();
 
     const uploadToIPFS = async (image) =>{
-        console.log(image)
+        
         if(typeof image !== 'undefined') {
             console.log("uploading image to ipfs");
             try {
                 const result = await client.add(image);
                 const resultUrl = `https://laferro.infura-ipfs.io/ipfs/${result.path}`;
                 setImage(resultUrl);
+                toast.warn("Creando NFT, espere un momento...");
                 return resultUrl;
                 
             } catch (error) {
@@ -51,25 +54,24 @@ const CreateForm = ({marketplace, nft}) => {
 
         try {
             const result = await client.add(JSON.stringify({ imageToUpload, dataShares, dataName, dataDescription }));
-            console.log('this is the result', result);
             mintThenList(result, dataShares);
-            console.log("NFT created and listed successfully");
+            toast.success("Por favor confirme la transacción en su wallet");
+            reset();
         } catch (error) {
             console.log("ipfs URI upload error: ", error);
         }
     }
 
     const mintThenList = async (result, dataShares) =>{
-        console.log('resunt in teh mintThenList', result);
+        
         const uri = `https://laferro.infura-ipfs.io/ipfs/${result.path}`;
-        console.log(uri);
+
         await (await nft.mint(uri)).wait();
 
         const id = await nft.tokenCount();
         await (await nft.setApprovalForAll(marketplace.address, true));
 
         const sharesAmount = dataShares; 
-        console.log('Shares amount:', sharesAmount);
         await (await marketplace.makeItem(nft.address, id, sharesAmount)).wait();
     }
 

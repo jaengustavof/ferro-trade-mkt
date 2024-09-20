@@ -1,44 +1,10 @@
-import { useState, useEffect } from 'react';
-import { ethers } from "ethers";
-import { BigNumber } from 'ethers';
 import { NFTCard } from './NFTCard';
+import useMarketplaceItems from '../../../hooks/useMarketplaceItems';
 
 //TODO: Pendiente Funcion de compra
 const MarketTrade = ({ marketplace, nft }) => {
 
-    const [loading, setLoading] = useState(true);
-    const [items, setItems] = useState([]);
-    const loadMarketplaceItem = async () => {
-        const itemCount = await marketplace.itemCount();
-        let items = [];
-        for (let i = 1; i <= itemCount; i++) {
-            const item = await marketplace.items(i);           
-            if(!item.sold) {
-                const uri = await nft.tokenURI(item.tokenId);
-                const response = await fetch(uri);
-                const metadata = await response.json();
-                const tokenID = +BigNumber.from(item.tokenId).toString();
-               
-                const totalPrice = await marketplace.getPriceFromItem(i);
-                items.push({
-                    totalPrice: +BigNumber.from(totalPrice).toString(),
-                    itemId: item.itemId,
-                    seller: item.seller,
-                    owner: item.owner,
-                    shares: metadata.dataShares,
-                    name: metadata.dataName,
-                    description: metadata.dataDescription,
-                    image: metadata.imageToUpload
-                }) 
-            }
-        }
-        setLoading(false);
-        setItems(items);
-    }
-
-    useEffect(() => {
-        loadMarketplaceItem()
-    }, [])
+    const { items, loading } = useMarketplaceItems(marketplace, nft);
 
     if (loading) return (
         <main style={{ padding: "1rem 0" }}>

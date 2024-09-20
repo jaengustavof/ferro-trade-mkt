@@ -1,6 +1,7 @@
 import CreateForm from "./CreateForm";
 import { useContext } from 'react';
 import { GlobalContext } from '../../../context/GlobalContext';
+import { ToastContainer } from 'react-toastify';
 
 export const Create = () => {
 
@@ -11,6 +12,7 @@ export const Create = () => {
     <section className="create-section">
       <img src={logo} alt="Create NFT" className="create-section__logo"/>
       <CreateForm marketplace={marketplace} nft={nft}  />
+      <ToastContainer />
     </section>
     
   )
