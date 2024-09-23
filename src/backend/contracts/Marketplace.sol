@@ -181,6 +181,26 @@ contract Marketplace is ReentrancyGuard, Ownable  {
             msg.sender
         );
     }
+    //TODO: hacer redeploy del contrato NFT y probar la funcionalidad de transferir un NFT
+    function transferItemTo(uint _itemId, address _to) external onlyOwner nonReentrant {
+        Item storage item = items[_itemId];
+        require(_itemId > 0 && _itemId <= itemCount, "Item does not exist");
+        require(!item.sold, "Item is already sold");
+        require(item.nft.ownerOf(item.tokenId) == address(this), "Marketplace is not the owner");
+
+        item.nft.transferFrom(address(this), _to, item.tokenId);
+        item.sold = true;
+        item.owner = _to;
+        owners[_itemId] = _to;
+
+        emit Transfered (
+            _itemId,
+            address(item.nft),
+            item.tokenId,
+            item.seller,
+            _to
+        );
+    }
 
     function allowSale(uint _itemId) external nonReentrant {
         Item storage item = items[_itemId];
