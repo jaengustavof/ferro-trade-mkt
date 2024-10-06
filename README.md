@@ -14,3 +14,11 @@ node scripts/sample-script.js
 npx hardhat help
 ```
 # ferro-tradde-mkt
+
+```bash
+# create .env file
+touch .env
+# install and run local development website
+npm install
+npm run dev
+```
