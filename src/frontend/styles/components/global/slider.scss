@@ -1,0 +1,56 @@
+.slider-container {
+    margin-bottom: 10rem;
+
+    @include mf-tablet {
+        margin: 0 10rem 12rem;
+    }
+
+    @include mf-laptop {
+        margin: 0 auto 12rem;
+        max-width: 120rem;
+    }
+}
+
+.slick-dots {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.slick-active {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.slick-arrow {
+    width: 4rem;
+    height: 4rem;
+    z-index: 100;
+}
+
+.slick-prev {
+    left: 0.8rem;
+
+    @include mf-tablet {
+        left: -2rem;
+    }
+
+    @include mf-laptop {
+        left: -4rem;
+    }
+}
+
+.slick-next {
+    right: 0.8rem;
+
+    @include mf-tablet {
+        right: -2rem;
+    }
+
+    @include mf-laptop {
+        right: -4rem;
+    }
+}
+
+.slick-prev::before,
+.slick-next::before {
+    font-size: 4rem;
+    color: rgba(255, 255, 255, 0.8);
+}

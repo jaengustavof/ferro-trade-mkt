@@ -1,0 +1,75 @@
+.faqs {
+    color: $white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 2.5rem;
+    padding: 4rem 2rem;
+    max-width: 120rem;
+    margin: 0 auto;
+    @include mf-tablet-big {
+        flex-direction: row;
+    }
+   .faqs-container { 
+        width: 100%;
+        padding: 2rem;  
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 1.6rem;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        .faq-icon {
+            font-size: 6rem;
+            flex-shrink: 0;
+            color: $waiting-list-color;
+        }
+        &__data {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            .container-title {
+                font-size: $h4-font-size;
+                font-weight: 700;
+                color: $waiting-list-color;
+                @include mf-tablet-big {
+                    min-height: 9rem;
+                }
+                @include mf-laptop {
+                    min-height: none;
+                }
+            }
+            .container-text {
+                font-size: 1.6rem;
+                font-weight: 400;
+                color: $waiting-list-color;
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 5; /* Limit to 5 lines */
+                -webkit-box-orient: vertical;
+                text-overflow: ellipsis;
+                transition: 0.5s ease-in-out;
+                @include mf-tablet-big {
+                    flex-direction: row;
+                }
+            }
+            .show-all {
+                -webkit-line-clamp: unset;
+                display: block;
+            }
+            .toggle-button {
+                background-color: transparent;
+                color: #007bff;
+                border: none;
+                cursor: pointer;
+                padding: 0;
+                margin-top: 10px;
+            }
+            .toggle-button:hover {
+                text-decoration: underline;
+            }
+        }
+   }
+}
