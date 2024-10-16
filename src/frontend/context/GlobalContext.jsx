@@ -1,14 +1,20 @@
 import { createContext, useState, useEffect } from 'react';
 import { ethers } from 'ethers';
-import MarketplaceAbi from '../contractsData/Marketplace.json';
-import MarketplaceAddress from '../contractsData/Marketplace-address.json';
-import NFTAbi from '../contractsData/NFT.json';
-import NFTAddress from '../contractsData/NFT-address.json';
+import deployedJson from '../contractsData/deployed.json';
+const MarketplaceAbi = deployedJson.marketplace.abi;
+const MarketplaceAddress = deployedJson.marketplace.address;
+const NFTAbi = deployedJson.nft.abi;
+const NFTAddress = deployedJson.nft.address;
+// import MarketplaceAbi from '../contractsData/Marketplace.json';
+// import MarketplaceAddress from '../contractsData/Marketplace-address.json';
+// import NFTAbi from '../contractsData/NFT.json';
+// import NFTAddress from '../contractsData/NFT-address.json';
 
 export const GlobalContext = createContext();
 
 export const GlobalProvider = ({ children }) => {
-    const [account, setAccount] = useState(null);
+    const _account = JSON.parse(localStorage.getItem('blockauth-connected')).did;
+    const [account, setAccount] = useState(_account || null);
     const [nft, setNFT] = useState({});
     const [marketplace, setMarketplace] = useState({});
     const [loading, setLoading] = useState(true);

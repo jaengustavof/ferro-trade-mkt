@@ -17,7 +17,8 @@ export const MarketHeader = ({account}) => {
             <h2 className="container-title">La Ferro Maketplace</h2>
             <p className="container-bubtitle">Descubre y adquiere NFTs exclusivos en nuestra plataforma.</p>
             <a 
-              href={`https://etherscan.io/address/${account}`}
+              // href={`https://etherscan.io/address/${account}`}
+              href={`http://localhost:4014/address/${account}`}
               target="_blank"
               rel="noreferrer noopener"
               className="container-user">
