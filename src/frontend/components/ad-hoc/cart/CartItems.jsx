@@ -77,7 +77,15 @@ export const CartItems = () => {
                         <p className="text">Total</p>
                         <p className="text">€ {finalPrice}</p>
                     </div>
-                    <button className="cart-items__button">Pagar</button>
+                    {/* <button className="cart-items__button">Pagar</button> */}
+
+                    <div className="cart-items__button">
+                        <stripe-buy-button
+                          buy-button-id="buy_btn_1QAgY4E8xKRW5vlskhok7nMl"
+                          publishable-key="pk_test_51MriPzE8xKRW5vlsAMcFVw1wLKNKUImCAW8GZ4cvYRjfqkCGmRj3TIaGC6bj27mBDVxUxY5XBOmNstkVJpSlNg5300Shxdbmpt"
+                        >
+                        </stripe-buy-button>
+                    </div>
                 </div>
                 </>
                 }
