@@ -12,6 +12,7 @@ $secondary-dark-color: #de9b0c;
 
 // Gradients
 $gradient-primary: linear-gradient(to right top, $primary-light-color, $waiting-list-color);
+$gradient-primary-reversed: linear-gradient(to left bottom, $primary-light-color, $waiting-list-color);
 $gradient-secondary: linear-gradient(
     90deg,
     $secondary-dark-color,
@@ -19,6 +20,7 @@ $gradient-secondary: linear-gradient(
     $secondary-dark-color
 );
 $gradient-waiting-list: linear-gradient(to right, $waiting-list-color, $waiting-list-color-light);
+
 
 // Grayscale
 $white: #ffffff;
@@ -45,12 +47,12 @@ $heading-font-family: "Lato", sans-serif;
 // Font Sizes
 $base-font-size: 1.6rem;
 $small-font-size: 1.4rem;
-$h1-font-size: 2.5rem;
-$h2-font-size: 2.2rem;
-$h3-font-size: 1.75rem;
-$h4-font-size: 1.5rem;
-$h5-font-size: 1.25rem;
-$h6-font-size: 1rem;
+$h1-font-size: 3.5rem;
+$h2-font-size: 3.2rem;
+$h3-font-size: 2.75rem;
+$h4-font-size: 2.5rem;
+$h5-font-size: 2.25rem;
+$h6-font-size: 2rem;
 
 // Font Weights
 $font-weight-light: 300;

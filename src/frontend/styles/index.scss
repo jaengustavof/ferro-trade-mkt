@@ -8,7 +8,22 @@
 @import "./base.scss";
 
 // LAYOUTS AND PAGES
-
+@import "./layouts/home.scss";
 
 // COMPONENTS
-@import "./components/navbar.scss"
+@import "./components/ad-hoc/home/heading.scss";
+@import "./components/ad-hoc/home/price-list.scss";
+@import "./components/ad-hoc/home/price-table.scss";
+@import "./components/ad-hoc/home/faqs.scss";
+@import "./components/global/navbar.scss";
+@import "./components/global/slider.scss";
+@import "./components/global/footer.scss";
+@import "./components/ad-hoc/menu/connectWallet.scss";
+@import "./components/ad-hoc/menu/cartMenu.scss";
+@import "./components/ad-hoc/marketplace/marketplaceHeader.scss";
+@import "./components/ad-hoc/marketplace/market.scss";
+@import "./components/ad-hoc/marketplace/nftContainer.scss";
+@import "./components/ad-hoc/create/create.scss";
+@import "./components/ad-hoc/cart/cartSteps.scss";
+@import "./components/ad-hoc/cart/cartItems.scss";
+

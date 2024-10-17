@@ -1,0 +1,56 @@
+footer {
+    width: 100%;
+    background-color: $primary-color;
+    border-top: 1px solid $white;
+    padding: 4rem 2rem;
+    .footer-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 2rem;
+        position: relative;
+        gap: 3rem;
+        @include mf-tablet {
+            width: 100%;
+            max-width: 120rem;
+            margin: auto;
+            flex-direction: row;
+        }
+        &__content {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            font-size: 1.4rem;
+            .footer-logo {
+                width: 15rem;
+            }
+            a {
+                text-align: center;
+                color: $white;
+                text-decoration: none;
+            }
+            .social-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 1rem;
+                a {
+                    background-color: $white;
+                    padding: 1rem;
+                    border-radius: 50%;
+                    color: $waiting-list-color;
+                    font-size: 1.6rem;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+        }
+        
+    }
+}

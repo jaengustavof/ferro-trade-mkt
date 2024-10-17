@@ -1,0 +1,25 @@
+.cart-menu-container {
+    padding: 1.5rem;
+    border-radius: 50%;
+    position: relative;
+    background-color: $secondary-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    &__items {
+        height: 2.5rem;
+        width: 2.5rem;
+        position: absolute;
+        top: -20%;
+        right: -20%;
+        background-color: $success-color;
+        padding: 0.5rem;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $white;
+        font-weight: bold;
+    }
+}
